@@ -1,5 +1,6 @@
 import os
 import py7zr
+import time
 import colorama
 
 colorama.init()
@@ -61,12 +62,13 @@ def copyFiles(file, img, newimg):
     os.system("copy /b " + img + '+' + file + ' ' + newimg)
 
 def createArchives(zipname, img, file, passwd):
+    cwd = os.getcwd()
     with py7zr.SevenZipFile(zipname, 'w', password=passwd) as archive:
-        archive.writeall(file, file)
+        archive.writeall(cwd,'base')
 
 def unzipArchives(zipname, passwd):
-    with py7zr.SevenZipFile(zipname, mode='r', password=passwd) as archive:
-        archive.extractall()
+    with py7zr.SevenZipFile(zipname, mode='r', password=passwd) as z:
+        z.extractall()
 
 def hide():
     print(colorama.Fore.YELLOW)
@@ -83,27 +85,17 @@ def hide():
     print(colorama.Fore.LIGHTGREEN_EX)
     print('Done!')
 
-def unhide():
-    print(colorama.Fore.LIGHTBLUE_EX)
-    imgname = input(str("Enter image name: "))
-    passwd = input(str("Enter decrypt password: "))
-    print(colorama.Fore.LIGHTCYAN_EX)
-    print("Unhiding...")
-    print(colorama.Fore.LIGHTGREEN_EX)
-    unzipArchives(imgname, passwd)
-    print("Done!")
-
 def main():
     print(colorama.Fore.LIGHTWHITE_EX)
-    print("What do you want to do?")
-    print("1. Hide a file\n2. Unhide a file")
-    print(colorama.Fore.LIGHTRED_EX)
-    choice = input(str(">>>"))
-    if choice == "1":
-        hide()
-    elif "2":
-        unhide()
-    else:
-        print("Command not found!")
-        main()
+    print(".", end='')
+    time.sleep(1)
+    print(".", end='')
+    time.sleep(1)
+    print(".", end='')
+    time.sleep(1)
+    print(".", end='')
+    time.sleep(1)
+    print(".", end='')
+    time.sleep(1)
+    hide()
 main()
